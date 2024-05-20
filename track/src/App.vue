@@ -6,22 +6,17 @@ import TheTimeLine from './pages/TheTimeLine.vue'
 import TheActivities from './pages/TheActivities.vue'
 import TheProgress from './pages/TheProgress.vue'
 import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from './constants'
+import { normilizePageHash } from './functions'
 
 let currentPage = ref(normilizePageHash())
 
-function normilizePageHash() {
-  const hash = window.location.hash.slice(1)
-
-  if ([PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE].includes(hash)) return hash
-
-  window.location.hash = PAGE_TIMELINE
-
-  return PAGE_TIMELINE
+function goTo(page) {
+  currentPage.value = page
 }
 </script>
 
 <template>
-  <TheHeader />
+  <TheHeader @go-to-timiline="goTo(PAGE_TIMELINE)" @go-to-progress="goTo(PAGE_PROGRESS)" />
 
   <main class="flex flex-grow flex-col">
     <TheTimeLine v-show="currentPage === PAGE_TIMELINE" />
@@ -29,7 +24,7 @@ function normilizePageHash() {
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
 
-  <TheNav :current-page="currentPage" @navigate="currentPage = $event" />
+  <TheNav :current-page="currentPage" @navigate="goTo($event)" />
 </template>
 
 <style scoped></style>
