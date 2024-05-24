@@ -12,5 +12,13 @@ const hourLinkClasses = [
 <template>
   <li class="relative flex flex-col gap-2 border-t border-gray-200 py-10 px-4">
     <a :class="hourLinkClasses" href="#">{{ timelineItem.hour }}:00</a>
+    <div>
+      <select name="" id="" class="w-full truncate rounded bg-gray-100 py-1 px-2 text-2xl">
+        <option value="" selected disabled>Rest</option>
+        <option value="">Coding</option>
+        <option value="">Reading</option>
+        <option value="">Training</option>
+      </select>
+    </div>
   </li>
 </template>
