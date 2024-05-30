@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   hour: {
@@ -14,8 +14,10 @@ const classes = [
     ? 'bg-purple-900 font-black text-white'
     : 'bg-gray-100 text-gray-500'
 ]
+
+const formattedHour = props.hour.toString().padStart(2, 0) + ':00'
 </script>
 
 <template>
-  <a :class="classes" href="#">{{ hour.toString().padStart(2, 0) }}:00</a>
+  <a :class="classes" href="#">{{ formattedHour }}</a>
 </template>
